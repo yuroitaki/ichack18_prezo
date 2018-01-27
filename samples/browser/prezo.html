@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Speech Sample</title>
+    <meta charset="utf-8" />
+    <script src="../../distrib/speech.sdk.bundle.js"></script>
+    <script src="prezo.js"></script> 
+  </head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:13px;">
+  <div id="warning">
+    <h1 style="font-weight:500;">Speech Recognition SDK not found.</h1>
+    <h2 style="font-weight:500;">Please execute <code>npm run bundle</code> and reload.</h2>
+  </div>
+  <div id="content" style="display:none">
+    <table width="100%">
+      <tr>
+        <td></td>
+        <td>
+          <button id="startBtn" disabled="disabled">Start</button>
+          <button id="stopBtn" disabled="disabled">Stop</button>
+          <input type="file" id="filePicker" accept=".wav" style="display:none"/>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <table>
+            <tr>
+              <td>Results:</td> 
+            </tr>
+            <tr>
+              <td>
+                <div class="jumbotron text-center">
+  		  <h1 id="h1d"></h1>
+  		  
+		</div>
+              </td>
+              
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>
