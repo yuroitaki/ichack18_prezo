@@ -1,0 +1,49 @@
+body{
+	margin: 0;
+}
+
+header{
+	width: 1396px;
+	height: 58px;
+	background-color: #E62828;
+	margin: 100 50;
+	filter: grayscale(95%);
+}	
+
+.logo{
+	padding: 9px 20px;
+	color: white;
+	font-family: Courier;
+}
+
+#bulk{
+	width: 1396px;
+	height: 550px;
+}
+
+.fade {
+   opacity: 1;
+   transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+   filter: grayscale(95%);
+}
+
+.fade:hover {
+    opacity: 0.5;
+}	  
+
+footer{
+	width: 1396px;
+	height: 58px;
+	background-color: #E62828;
+	margin: 0;
+	filter: grayscale(95%);
+}
+
+
+.stopbutton{
+    position: fixed;
+    bottom: 5%;
+    left: 50%;
+}
