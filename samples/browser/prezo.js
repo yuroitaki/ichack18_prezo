@@ -65,22 +65,8 @@ function RecognizerStart(SDK, recognizer) {
           if (event instanceof SDK.RecognitionTriggeredEvent)
         */
         switch (event.Name) {
-            // case "RecognitionTriggeredEvent" :
-            //     UpdateStatus("Initializing");
-            //     break;
-            // case "ListeningStartedEvent" :
-            //     UpdateStatus("Listening");
-            //     break;
-            // case "RecognitionStartedEvent" :
-            //     UpdateStatus("Listening_Recognizing");
-            //     break;
-            // case "SpeechStartDetectedEvent" :
-            //     UpdateStatus("Listening_DetectedSpeech_Recognizing");
-            //     console.log(JSON.stringify(event.Result)); // check console for other information in result
-            //     break;
         case "SpeechHypothesisEvent" :
             UpdateRecognizedPhrase(event.Result.Text);
-            // UpdateRecognizedHypothesis(event.Result.Text, false);
             console.log(JSON.stringify(event.Result)); // check console for other information in result
             break;
         case "SpeechFragmentEvent" :
@@ -91,13 +77,7 @@ function RecognizerStart(SDK, recognizer) {
             OnSpeechEndDetected();
             UpdateStatus("Processing_Adding_Final_Touches");
             console.log(JSON.stringify(event.Result)); // check console for other information in result
-            //     break;
-            // case "SpeechSimplePhraseEvent" :
-            //     UpdateRecognizedPhrase(JSON.stringify(event.Result, null, 3));
-            //     break;
-            // case "SpeechDetailedPhraseEvent" :
-            //     UpdateRecognizedPhrase(JSON.stringify(event.Result, null, 3));
-            //     break;
+            break;
         case "RecognitionEndedEvent" :
             OnComplete();
             UpdateStatus("Idle");
@@ -124,49 +104,43 @@ function RecognizerStop(SDK, recognizer) {
 var languageOptions = "en-US";
 var recognitionMode = "Dictation";
 var formatOptions = "Detailed";
-var key = "89dfb15419eb4e8e903949fa8ae49d71";
+var key = "0e70ab8d054b45d084b2c746a8ddade7";
 
 var startBtn, stopBtn, hypothesisDiv, phraseDiv, statusDiv;
 var key, languageOptions, formatOptions, recognitionMode, inputSource, filePicker;
 var SDK;
 var recognizer;
 var previousSubscriptionKey;
+var bulk
 
 document.addEventListener("DOMContentLoaded", function () {
     createBtn = document.getElementById("createBtn");
     startBtn = document.getElementById("startBtn");
     stopBtn = document.getElementById("stopBtn");
-    phraseDiv = document.getElementById("h1d");
-    // hypothesisDiv = document.getElementById("hypothesisDiv");
-    // statusDiv = document.getElementById("statusDiv");
-    // key = document.getElementById("key");
-    // languageOptions = document.getElementById("languageOptions");
-    // formatOptions = document.getElementById("formatOptions");
+    pD1 = document.getElementById("h1d");
+    pD2 = document.getElementById("h2d");
+    pD3 = document.getElementById("h3d");
+    pD4 = document.getElementById("h4d");
+    pD5 = document.getElementById("h5d");
+    pD6 = document.getElementById("h6d");
     inputSource = document.getElementById("inputSource");
-    // recognitionMode = document.getElementById("recognitionMode");
     filePicker = document.getElementById('filePicker');
-
-    // languageOptions.addEventListener("change", Setup);
-    // formatOptions.addEventListener("change", Setup);
-    // recognitionMode.addEventListener("change", Setup);
-
+    bulk = document.getElementById("bulk");
+    
     startBtn.addEventListener("click", function () { 
         Setup();
-
-        // hypothesisDiv.innerHTML = "";
-        // phraseDiv.innerHTML = "";
-        RecognizerStart(SDK, recognizer);
+	RecognizerStart(SDK, recognizer);
+	bulk.style.display ="none";
+	stopBtn.style.display ="block";
         startBtn.disabled = true;
         stopBtn.disabled = false;
         
     });    
-
     stopBtn.addEventListener("click", function () {
         RecognizerStop(SDK, recognizer);
         startBtn.disabled = false;
         stopBtn.disabled = true;
     });
-
     Initialize(function (speechSdk) {
         SDK = speechSdk;
         startBtn.disabled = false;
@@ -180,6 +154,43 @@ function Setup() {
     recognizer = RecognizerSetup(SDK, recognitionMode.value, languageOptions.value, SDK.SpeechResultFormat[formatOptions.value], key);
 }
 
+function OnSpeechEndDetected() {
+    stopBtn.disabled = true;
+}
+
+function OnComplete() {
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+}
+
+function getRandomInt(max){
+    return Math.floor(Math.random()*Math.floor(max));
+}
+
+function UpdateRecognizedPhrase(json) {
+    var json_result = processJson(json);
+    var pD_array = [pD1,pD2,pD3,pD4,pD5,pD6];
+    var rand_index  = getRandomInt(pD_array.length);
+    pD_array[rand_index].innerHTML += json_result + " "; 
+}
+
+function processJson(json){
+    
+    var sep_json = json.split(" ");
+    var len_json = sep_json.length;
+    
+    for(var i=0;i<len_json;i++){
+	var lower_json = sep_json[i].toLowerCase();
+	switch(lower_json){
+	case "cat": return "&#128049";break;
+	case "pretzel": return "&#734838";break;
+	default: return sep_json[i]; 
+	}
+    }
+}
+
+
+
 // function UpdateRecognizedHypothesis(text, append) {
 //     if (append) 
 //         hypothesisDiv.innerHTML += text + " ";
@@ -191,18 +202,3 @@ function Setup() {
 //         hypothesisDiv.innerHTML = "..." + hypothesisDiv.innerHTML.substr(length-400, length);
 //     }
 // }
-
-function OnSpeechEndDetected() {
-    stopBtn.disabled = true;
-}
-
-function UpdateRecognizedPhrase(json) {
-    //hypothesisDiv.innerHTML = "";
-    phraseDiv.innerHTML += json + "&#127821\n";
-}
-
-function OnComplete() {
-    startBtn.disabled = false;
-    stopBtn.disabled = true;
-}
-
