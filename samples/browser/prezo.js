@@ -111,7 +111,9 @@ var key, languageOptions, formatOptions, recognitionMode, inputSource, filePicke
 var SDK;
 var recognizer;
 var previousSubscriptionKey;
-var bulk
+var bulk;
+var box;
+
 
 document.addEventListener("DOMContentLoaded", function () {
     createBtn = document.getElementById("createBtn");
@@ -119,18 +121,20 @@ document.addEventListener("DOMContentLoaded", function () {
     stopBtn = document.getElementById("stopBtn");
     pD1 = document.getElementById("h1d");
     pD2 = document.getElementById("h2d");
-    pD3 = document.getElementById("h3d");
-    pD4 = document.getElementById("h4d");
-    pD5 = document.getElementById("h5d");
-    pD6 = document.getElementById("h6d");
+    // pD3 = document.getElementById("h3d");
+    // pD4 = document.getElementById("h4d");
+    // pD5 = document.getElementById("h5d");
+    // pD6 = document.getElementById("h6d");
     inputSource = document.getElementById("inputSource");
     filePicker = document.getElementById('filePicker');
     bulk = document.getElementById("bulk");
+    box = document.getElementById("box");
     
     startBtn.addEventListener("click", function () { 
         Setup();
 	RecognizerStart(SDK, recognizer);
 	bulk.style.display ="none";
+    box.style.display="block";
 	stopBtn.style.display ="block";
         startBtn.disabled = true;
         stopBtn.disabled = false;
@@ -167,11 +171,150 @@ function getRandomInt(max){
     return Math.floor(Math.random()*Math.floor(max));
 }
 
+var totallength = 0;
+var rotated = false;
+var smalllength = 6;
+var largelength = 10;
+var runone = true;
+var limitlength1 = 40;
+var limitlength2 = 80;
 function UpdateRecognizedPhrase(json) {
     var json_result = processJson(json);
-    var pD_array = [pD1,pD2,pD3,pD4,pD5,pD6];
-    var rand_index  = getRandomInt(pD_array.length);
-    pD_array[rand_index].innerHTML += json_result + " "; 
+    json_result += " ";
+    totallength += json_result.length;
+
+
+    if (runone){
+    if(totallength < limitlength1){
+        //phraseDiv.innerHTML += json;
+        if (json_result.length < smalllength){
+            $('#h1d').append('<span id="numba2">'+json_result+'</span>');
+
+        } else if (json_result.length >= smalllength && json_result.length < largelength){
+
+            $('#h1d').append('<span id="numba3">'+json_result+'</span>');
+        } else {
+             $('#h1d').append('<span id="numba3">'+json_result+'</span>');
+
+        }
+        
+    
+    } else if (totallength > limitlength1 && totallength <limitlength2 && !rotated) {
+       // SlideRemove();
+        rotateFoo();
+        if (json_result.length < smalllength){
+            $('#h2d').append('<span id="numba2">'+json_result+'</span>');
+
+        } else if (json_result.length >= smalllength && json_result.length < largelength){
+
+            $('#h2d').append('<span id="numba3">'+json_result+'</span>');
+        } else {
+             $('#h2d').append('<span id="numba3">'+json_result+'</span>');
+
+        }
+        rotated = true;
+
+
+
+    } else if (totallength > limitlength1 && totallength <limitlength2 && rotated){
+
+       if (json_result.length < smalllength){
+            $('#h2d').append('<span id="numba2">'+json_result+'</span>');
+
+        } else if (json_result.length >= smalllength && json_result.length < largelength){
+
+            $('#h2d').append('<span id="numba3">'+json_result+'</span>');
+        } else {
+             $('#h2d').append('<span id="numba3">'+json_result+'</span>');
+
+        }
+
+    } else if (totallength > limitlength2 && rotated){
+
+        rotated = false;
+        runone = false;
+        totallength = 0;
+        Disappear();
+       rotateback();
+    }
+
+    } else {
+
+        if(totallength < limitlength2){
+        if (json_result.length < smalllength){
+            $('#h1d').append('<span id="numba2">'+json_result+'</span>');
+
+        } else if (json_result.length >= smalllength && json_result.length < largelength){
+
+            $('#h1d').append('<span id="numba3">'+json_result+'</span>');
+        } else {
+             $('#h1d').append('<span id="numba3">'+json_result+'</span>');
+
+        }
+        } else {
+            //SlideRemove();
+            Disappear();
+            runone = true;
+
+            totallength = 0;
+
+        }
+
+
+    }
+   
+    //var pD_array = [pD1,pD2,pD3,pD4,pD5,pD6];
+    //var rand_index  = getRandomInt(pD_array.length);
+   // pD_array[rand_index].innerHTML += json_result + " "; 
+}
+
+function rotateFoo(){
+    var angle = ($('#h1d').data('angle') - 90) || -90;
+    $('#h1d').css({transform: 'rotate(-90deg) translate(-200px,-200px)'});
+    $('#h1d').css('width', '600px');
+    $('#h1d').data('angle', angle);
+    $('#h2d').css({transform: 'translate(0px,-200px)'});
+    // $('#h1d').css("transform","translate(-250px,0)");
+
+   // var angle = ($('#h2d').data('angle') - 90) || -90;
+    //$('#h2d').css({'transform': 'rotate(' + angle + 'deg)'});
+    // $('#h2d').data('angle', angle);
+
+
+}
+
+function rotateback(){
+
+    var angle = ($('#h1d').data('angle') + 90) || +90;
+    $('#h1d').css({transform: 'rotate(0deg) translate(0px,0px)'});
+    $('#h2d').css({transform: 'translate(0px, 0px)'});
+    $('#h1d').data('angle', angle);
+    $('#h1d').css('width', '100%');
+
+}
+
+function SlideRemove(){
+
+        
+
+        $("h1").slideToggle();
+        $("h1").empty();
+        $("h1").slideToggle();
+        
+}
+
+function Disappear(){
+
+    
+        $("#h1d").empty();
+        $("#h2d").empty();
+        
+
+}
+
+function colorchange(){
+
+        $("body").css("background-color", "yellow");
 }
 
 function processJson(json){
@@ -180,12 +323,21 @@ function processJson(json){
     var len_json = sep_json.length;
     
     for(var i=0;i<len_json;i++){
-	var lower_json = sep_json[i].toLowerCase();
-	switch(lower_json){
-	case "cat": return "&#128049";break;
-	case "pretzel": return "&#734838";break;
+	// var lower_json = sep_json[i].toLowerCase();
+	switch(sep_json[i]){
+	case "cat" : return "&#128049"; break;
+    case "basketball" : return "&#127936"; break;
+    case "coffee" : return "&#9749"; break;
+    case "dog" : return "&#128054"; break;
+    case "people" : return "&#128102"; break;
+    case "pizza" : return "&#127829"; break;
+    case "say" : return "&#128068"; break;
+    case "see" : return "&#128065"; break;
+    case "sunny" : return "&#127774"; break;
+    case "sun" : return "&#127774"; break;
+    case "tea" : return "&#127861"; break;
 	default: return sep_json[i]; 
-	}
+    }       
     }
 }
 

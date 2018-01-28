@@ -14,24 +14,31 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> 
 
-  <header>
-	<h1 class="logo" style="margin:0px">Prezo</h1>
-  </header>
   
   <body style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:13px;">
+  <header>
+    <h1 class="logo" style="margin:0px">Prezo</h1>
+  </header> 
     <div id="warning">
       <h1 style="font-weight:500;">Speech Recognition SDK not found.</h1>
       <h2 style="font-weight:500;">Please execute <code>npm run bundle</code> and reload.</h2>
     </div>
     <div id="content" style="display:none;">
       
-      <div class="jumbotron text-center" style="background:transparent !important">
-	<h1 id="h1d" class="1d"></h1>
-	<h2 id="h2d" class="2d"></h2>
+      <div id="box" class="box" style="display:none">
+	      
+
+        <h1 id="h1d"></h1>
+        <div class="box2">
+      
+          <h1 id="h2d"></h1>
+
+        </div>
+	<!-- <h2 id="h2d" class="2d"></h2>
 	<h3 id="h3d" class="3d"></h3>
         <h4 id="h4d" class="4d"></h4>
 	<h5 id="h5d" class="5d"></h5>
-	<h6 id="h6d" class="6d"></h6>
+	<h6 id="h6d" class="6d"></h6> -->
       </div>
 
       <div id="bulk" style="display:block;">

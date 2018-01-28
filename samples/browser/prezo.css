@@ -47,3 +47,37 @@ footer{
     bottom: 5%;
     left: 50%;
 }
+
+
+
+.box {
+            background-color:#ffffff;
+            height: 700px;
+            width:75%;
+            word-wrap: break-word; 
+            padding-left: 150px;
+            padding-right: 80px;
+
+}
+
+
+.box2 {
+            background-color:#ffffff;
+            height: 700px;
+            width:70%;
+            float: right;
+            word-wrap: break-word; 
+            transition: transform 0.6s ease;   
+}
+
+span#numba2 {
+
+            font-size: 50px;
+}
+
+span#numba3 {
+
+            font-size: 100px;
+
+
+}
