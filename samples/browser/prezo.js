@@ -100,11 +100,11 @@ function RecognizerStop(SDK, recognizer) {
     // recognizer.AudioSource.Detach(audioNodeId) can be also used here. (audioNodeId is part of ListeningStartedEvent)
     recognizer.AudioSource.TurnOff();
 }
-
+//please check Microsoft documentation for more details on these options that can be configured
 var languageOptions = "en-US";
 var recognitionMode = "Dictation";
 var formatOptions = "Detailed";
-var key = "0e70ab8d054b45d084b2c746a8ddade7";
+var key = " "; //enter your API key here
 
 var startBtn, stopBtn, hypothesisDiv, phraseDiv, statusDiv;
 var key, languageOptions, formatOptions, recognitionMode, inputSource, filePicker;
@@ -121,10 +121,6 @@ document.addEventListener("DOMContentLoaded", function () {
     stopBtn = document.getElementById("stopBtn");
     pD1 = document.getElementById("h1d");
     pD2 = document.getElementById("h2d");
-    // pD3 = document.getElementById("h3d");
-    // pD4 = document.getElementById("h4d");
-    // pD5 = document.getElementById("h5d");
-    // pD6 = document.getElementById("h6d");
     inputSource = document.getElementById("inputSource");
     filePicker = document.getElementById('filePicker');
     bulk = document.getElementById("bulk");
@@ -262,10 +258,6 @@ function UpdateRecognizedPhrase(json) {
 
 
     }
-   
-    //var pD_array = [pD1,pD2,pD3,pD4,pD5,pD6];
-    //var rand_index  = getRandomInt(pD_array.length);
-   // pD_array[rand_index].innerHTML += json_result + " "; 
 }
 
 function rotateFoo(){
