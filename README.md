@@ -1,3 +1,12 @@
+## Disclaimer
+
+This repository is cloned from Microsoft's Azure-Samples/SpeechToText-WebSockets-Javascript repository (https://github.com/Azure-Samples/SpeechToText-WebSockets-Javascript). Apologies from the author for not forking it initially. 
+
+We have made some modification on the original Sample.html (take a look at [prezo.html](samples/browser/prezo.html)), in which we extracted the Javascript codes from the original HTML file to create a new JS front-end file (take a look at [prezo.js](samples/browser/prezo.js)). The associated CSS file is created as well.
+
+
+### Official README.md
+
 [![npm version](https://badge.fury.io/js/microsoft-speech-browser-sdk.svg)](https://www.npmjs.com/package/microsoft-speech-browser-sdk)
 
 ## Prerequisites
