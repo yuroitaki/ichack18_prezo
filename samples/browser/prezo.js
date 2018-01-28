@@ -117,7 +117,12 @@ document.addEventListener("DOMContentLoaded", function () {
     createBtn = document.getElementById("createBtn");
     startBtn = document.getElementById("startBtn");
     stopBtn = document.getElementById("stopBtn");
-    phraseDiv = document.getElementById("h1d");
+    pD1 = document.getElementById("h1d");
+    pD2 = document.getElementById("h2d");
+    pD3 = document.getElementById("h3d");
+    pD4 = document.getElementById("h4d");
+    pD5 = document.getElementById("h5d");
+    pD6 = document.getElementById("h6d");
     inputSource = document.getElementById("inputSource");
     filePicker = document.getElementById('filePicker');
     bulk = document.getElementById("bulk");
@@ -158,10 +163,15 @@ function OnComplete() {
     stopBtn.disabled = true;
 }
 
+function getRandomInt(max){
+    return Math.floor(Math.random()*Math.floor(max));
+}
 
 function UpdateRecognizedPhrase(json) {
     var json_result = processJson(json);
-    phraseDiv.innerHTML += json_result + " ";
+    var pD_array = [pD1,pD2,pD3,pD4,pD5,pD6];
+    var rand_index  = getRandomInt(pD_array.length);
+    pD_array[rand_index].innerHTML += json_result + " "; 
 }
 
 function processJson(json){
