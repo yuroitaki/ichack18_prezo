@@ -321,56 +321,63 @@ function processJson(json){
     
     var sep_json = json.split(" ");
     var len_json = sep_json.length;
+
+    if((sep_json[0]=="stop")&&(sep_json[1]=="it")){
+	RecognizerStop(SDK, recognizer);
+	return "...";
+    }
     
+    if((sep_json[0]=="full")&&(sep_json[1]=="stop")){
+	RecognizerStop(SDK, recognizer);
+	return ".";
+    }
+
     for(var i=0;i<len_json;i++){
 	// var lower_json = sep_json[i].toLowerCase();
 	switch(sep_json[i]){
 	case "cat" : return "&#128049"; break;
-    case "cats" : return "&#128049"; break;
-    case "basketball" : return "&#127936"; break;
-    case "coffee" : return "&#9749"; break;
-    case "dog" : return "&#128054"; break;
-    case "dogs" : return "&#128054"; break;
-    case "people" : return "&#128102"; break;   
-    case "pizza" : return "&#127829"; break;
-    case "pizzas" : return "&#127829"; break;
-    case "say" : return "&#128068"; break;
-    case "talk" : return "&#128068"; break;
-    case "see" : return "&#128065"; break;
-    case "sunny" : return "&#127774"; break;
-    case "sun" : return "&#127774"; break;
-    case "tea" : return "&#127861"; break;
-    case "T" : return "&#127861"; break;
-    case "rain" : return "&#9748"; break;
-    case "rainy" : return "&#9748"; break;
-    case "football" : return "&#9917"; break;
-    case "star" : return "&#9956"; break;
-    case "peace" : return "&#9996"; break;
-    case "piece" : return "&#9996"; break;
-    case "peas" : return "&#9996"; break;
-    case "music" : return "&#9835"; break;
-    case "recycle" : return "&#9842"; break;
-    case "balance" : return "&#9878"; break;
-    case "square" : return "&#9633"; break;
-    case "rectangle" : return "&#9645"; break;
-    case "triangle" : return "&#9651"; break;
-    case "circle" : return "&#9711"; break;
-    case "wrong" : return "&#935"; break;
-    case "correct" : return "&#10003"; break;
-    case "bug" : return "&#128030"; break;
-    case "bugs" : return "&#128030"; break;
-    case "book" : return "&#128030"; break;
-    case "buck" : return "&#128030"; break;
-    case "bob" : return "&#128030"; break;
-    case "iboc" : return "&#128030"; break;
-    case "rocket" : return "&#128640"; break;
-    case "car" : return "&#128663"; break;
-    case "bus" : return "&#128652"; break;
-
-
-    
+	case "cats" : return "&#128049"; break;
+	case "basketball" : return "&#127936"; break;
+	case "coffee" : return "&#9749"; break;
+	case "dog" : return "&#128054"; break;
+	case "dogs" : return "&#128054"; break;
+	case "people" : return "&#128102"; break;   
+	case "pizza" : return "&#127829"; break;
+	case "pizzas" : return "&#127829"; break;
+	case "say" : return "&#128068"; break;
+	case "talk" : return "&#128068"; break;
+	case "see" : return "&#128065"; break;
+	case "sunny" : return "&#127774"; break;
+	case "sun" : return "&#127774"; break;
+	case "tea" : return "&#127861"; break;
+	case "T" : return "&#127861"; break;
+	case "rain" : return "&#9748"; break;
+	case "rainy" : return "&#9748"; break;
+	case "football" : return "&#9917"; break;
+	case "star" : return "&#9956"; break;
+	case "peace" : return "&#9996"; break;
+	case "piece" : return "&#9996"; break;
+	case "peas" : return "&#9996"; break;
+	case "music" : return "&#9835"; break;
+	case "recycle" : return "&#9842"; break;
+	case "balance" : return "&#9878"; break;
+	case "square" : return "&#9633"; break;
+	case "rectangle" : return "&#9645"; break;
+	case "triangle" : return "&#9651"; break;
+	case "circle" : return "&#9711"; break;
+	case "wrong" : return "&#935"; break;
+	case "correct" : return "&#10003"; break;
+	case "bug" : return "&#128030"; break;
+	case "bugs" : return "&#128030"; break;
+	case "book" : return "&#128030"; break;
+	case "buck" : return "&#128030"; break;
+	case "bob" : return "&#128030"; break;
+	case "iboc" : return "&#128030"; break;
+	case "rocket" : return "&#128640"; break;
+	case "car" : return "&#128663"; break;
+	case "bus" : return "&#128652"; break;	    
 	default: return sep_json[i]; 
-    }       
+	}       
     }
 }
 
